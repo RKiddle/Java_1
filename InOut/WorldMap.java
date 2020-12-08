@@ -1,8 +1,12 @@
 /*
-Reads boundary information of a country (or other geographic entity) from standard input and
+@author: Richard Kiddle 8/12/20
+@description: Reads boundary information of a country (or other geographic entity) from standard input and
 plots the results to standard drawing. A country consists of a set of regions
 (e.g., states, provinces, or other administrative divisions), each of which is described by a polygon
 
+javac-introcs WorldMap.java
+
+java-introcs WorldMap < usa.txt
  */
 
 
@@ -10,23 +14,26 @@ public class WorldMap {
 
     public static void main(String[] args) {
         // Scale as per first four values.
+        StdDraw.enableDoubleBuffering();
         double x0 = 0;
         double y0 = 0;
-        double x1 = StdIn.readDouble();
-        double y1 = StdIn.readDouble();
+        int x1 = StdIn.readInt();
+        int y1 = StdIn.readInt();
+        StdDraw.setCanvasSize(x1, y1);
         StdDraw.setXscale(x0, x1);
         StdDraw.setYscale(y0, y1);
         // Read the points and plot to standard drawing.
         while (!StdIn.isEmpty()) {
             String location = StdIn.readString();
             int n = StdIn.readInt();
-            double[] x_cor = new double[n];
-            double[] y_cor = new double[n];
+            double[] xCor = new double[n];
+            double[] yCor = new double[n];
             for (int i = 0; i < n; i++) {
-                x_cor[i] = StdIn.readDouble();
-                y_cor[i] = StdIn.readDouble();
+                xCor[i] = StdIn.readDouble();
+                yCor[i] = StdIn.readDouble();
             }
-            StdDraw.polygon(x_cor, y_cor);
+            StdDraw.polygon(xCor, yCor);
         }
+        StdDraw.show();
     }
 }
